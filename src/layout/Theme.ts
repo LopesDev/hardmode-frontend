@@ -1,0 +1,25 @@
+import { DefaultTheme } from 'styled-components';
+
+const BASE_UNIT = 8;
+
+const theme :DefaultTheme = {
+    pallet: {
+        white: '#fff',
+        background: '#f2f3f5',
+        text: '#666',
+        title: '#2E384D',
+        link: '#5965E0',
+        grey: '#E9E9E9',
+        primary: '#FEB674',
+        secondary: '#BA68C8',
+    },
+    
+    breakpoint: {
+        lg: '1080px',
+        md: '720px'
+    },
+    
+    spacing: (value :number) => `${ BASE_UNIT * value }px`,
+}
+
+export default theme;

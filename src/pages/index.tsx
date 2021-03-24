@@ -1,13 +1,27 @@
 import React from 'react';
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import styled, { ThemeProvider } from 'styled-components';
+
+import theme from '../layout/Theme';
+import GlobalStyles from '../layout/GlobalStyles';
+
+const Title = styled.h1`
+  color: green;
+`;
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Head>
         <title>Hello Word</title>
       </Head>
-    </div>
+
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+
+        <Title>Olá mundo</Title>
+
+      </ThemeProvider>
+    </>
   )
 }
