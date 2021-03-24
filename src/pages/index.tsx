@@ -5,9 +5,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import theme from '../layout/Theme';
 import GlobalStyles from '../layout/GlobalStyles';
 
-const Title = styled.h1`
-  color: green;
-`;
+import Header from '../components/header';
 
 export default function Home() {
   return (
@@ -19,7 +17,7 @@ export default function Home() {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
 
-        <Title>Olá mundo</Title>
+        <Header />
 
       </ThemeProvider>
     </>
