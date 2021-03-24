@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Hello Word</title>
+        <title>HardMode Clan</title>
       </Head>
 
       <ThemeProvider theme={theme}>

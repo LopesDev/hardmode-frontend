@@ -12,11 +12,6 @@ declare module 'styled-components' {
             primary: string,
             secondary: string,
             link: string,
-            // red: string,
-            // green:  string,
-            // blue:  string,
-            // blueDark:  string,
-            // blueTwitter:  string
         },
     
         breakpoint: {
@@ -25,6 +20,21 @@ declare module 'styled-components' {
         },
     
         spacing: Function,
+
+        typografy: {
+            title: {
+                fontFamily: string,
+                medium: number,
+                bold: number,
+            },
+            text: {
+                fontFamily: string,
+                light: number,
+                regular: number,
+                medium: number,
+                bold: number,
+            }
+        }
 
     }
 }
