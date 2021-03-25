@@ -21,12 +21,12 @@ const theme:DefaultTheme = {
 
     typografy: {
         title: {
-            fontFamily: '\'Montserrat\', sans-serif',
+            fontFamily: "'Montserrat', sans-serif",
             medium: 500,
             bold: 600,
         },
         text: {
-            fontFamily: '\'Poppins\', sans-serif',
+            fontFamily: "'Poppins', sans-serif",
             light: 300,
             regular: 400,
             medium: 500,

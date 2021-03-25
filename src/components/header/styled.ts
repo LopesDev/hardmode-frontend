@@ -24,8 +24,11 @@ const RoutesList = styled.ul`
 const MenuItem = styled.li`
     margin: 0px ${({theme}) => theme.spacing(1)};
     padding: ${({theme}) => theme.spacing(1)};
+
     color: ${({theme}) => theme.pallet.text};
+
     font-size: 1rem;
+    font-weight: 500;
 `;
 
 const LogoWraper = styled.div`
@@ -37,6 +40,7 @@ const LogoWraper = styled.div`
     h3 {
         font-size: 1.3rem;
         user-select: none;
+        font-family: ${({theme}) => theme.typografy.title.fontFamily};
     }
 `;
 
