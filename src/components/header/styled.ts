@@ -55,6 +55,7 @@ const Anchor = styled.a`
     justify-content: center;
 
     margin: 0px 0px 0px ${({theme}) => theme.spacing(1)};
+    border-radius: ${({theme}) => theme.spacing(.5)};
 
     span {
         padding: ${({theme}) => `${theme.spacing(1)} ${theme.spacing(2)}` };

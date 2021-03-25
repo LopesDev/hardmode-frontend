@@ -2,7 +2,7 @@ import { DefaultTheme } from 'styled-components';
 
 const BASE_UNIT = 8;
 
-const theme :DefaultTheme = {
+const theme:DefaultTheme = {
     pallet: {
         white: '#fff',
         background: '#f2f3f5',

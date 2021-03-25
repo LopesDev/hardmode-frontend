@@ -7,6 +7,8 @@ import GlobalStyles from '../layout/GlobalStyles';
 
 import Header from '../components/header';
 
+import WellcomeSection from '../container/wellcome-section';
+
 export default function Home() {
   return (
     <>
@@ -18,6 +20,8 @@ export default function Home() {
         <GlobalStyles />
 
         <Header />
+
+        <WellcomeSection />
 
       </ThemeProvider>
     </>
