@@ -8,7 +8,7 @@ const theme :DefaultTheme = {
         background: '#f2f3f5',
         text: '#666',
         title: '#2E384D',
-        link: '#5965E0',
+        link: '#2D9CDB',
         grey: '#E9E9E9',
         primary: '#FEB674',
         secondary: '#BA68C8',

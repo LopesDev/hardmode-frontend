@@ -35,7 +35,7 @@ const GlobalStyle = createGlobalStyle`
 
     p, label, span, li, a {
         font-family: ${({theme}) => theme.typografy.text.fontFamily};
-        font-family: ${({theme}) => theme.typografy.text.regular};
+        font-weight: ${({theme}) => theme.typografy.text.regular};
     }
 
     button {
