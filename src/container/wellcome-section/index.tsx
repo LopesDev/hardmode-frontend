@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import {
     WellcomeSection, SVGWrapper, WellcomeBox, BoxFooter, AnchorWithIcon, Anchor
 } from './styled';
@@ -17,14 +19,18 @@ function WellcomeSectionContainer() {
                 </p>
 
                 <BoxFooter>
-                    <AnchorWithIcon>
-                        <span>Criar um usuário</span>
-                        <img src="/icons/dashicons_arrow-right-alt2.svg" alt="Go to register" />
-                    </AnchorWithIcon>
+                    <Link href="/register">
+                        <AnchorWithIcon href="/register">
+                            <span>Criar um usuário</span>
+                            <img src="/icons/dashicons_arrow-right-alt2.svg" alt="Go to register" />
+                        </AnchorWithIcon>
+                    </Link>
 
-                    <Anchor>
-                        Ver membros cadastrados
-                    </Anchor>
+                    <Link href="/members">
+                        <Anchor href="/members">
+                            Ver membros cadastrados
+                        </Anchor>
+                    </Link>
                 </BoxFooter>
             </WellcomeBox>
 

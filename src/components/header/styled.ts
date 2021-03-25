@@ -6,7 +6,7 @@ const HeaderWrapper = styled.header`
 
 const Navigation = styled.nav`
     margin: 0px auto;
-    padding: ${({theme}) => theme.spacing(1)} 0px;
+    padding: 0px ${({theme}) => theme.spacing(8)};
     max-width: 1200px;
 
     display: flex;
@@ -23,12 +23,19 @@ const RoutesList = styled.ul`
 
 const MenuItem = styled.li`
     margin: 0px ${({theme}) => theme.spacing(1)};
-    padding: ${({theme}) => theme.spacing(1)};
+    padding: ${({theme}) => theme.spacing(2)};
 
     color: ${({theme}) => theme.pallet.text};
 
     font-size: 1rem;
     font-weight: 500;
+
+    transition: color 250ms ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        color: ${({theme}) => theme.pallet.link};
+    }
 `;
 
 const LogoWraper = styled.div`
@@ -51,18 +58,19 @@ const MainContent = styled.div`
 `;
 
 const Anchor = styled.a`
-    color: ${({theme}) => theme.pallet.white};
-    background: ${({theme}) => theme.pallet.link};
-
     display: flex;
     align-items: center;
     justify-content: center;
 
     margin: 0px 0px 0px ${({theme}) => theme.spacing(1)};
-    border-radius: ${({theme}) => theme.spacing(.5)};
 
     span {
-        padding: ${({theme}) => `${theme.spacing(1)} ${theme.spacing(2)}` };
+        padding: ${({theme}) => `${theme.spacing(1)} ${theme.spacing(2)}`};
+
+        color: ${({theme}) => theme.pallet.white};
+        background: ${({theme}) => theme.pallet.link};
+
+        border-radius: ${({theme}) => theme.spacing(.5)};
     }
 `;
 

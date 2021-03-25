@@ -38,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
         font-weight: ${({theme}) => theme.typografy.text.regular};
     }
 
-    button {
+    button, a {
         cursor: pointer;
     }
 

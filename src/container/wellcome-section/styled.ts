@@ -5,7 +5,7 @@ const WellcomeSection = styled.section`
     align-items: center;
 
     margin: 0px auto;
-    padding: ${({theme}) => theme.spacing(16)} 0px;
+    padding: ${({theme}) => `${theme.spacing(16)} ${theme.spacing(8)}`};
 
     max-width: 1200px;
 `;
