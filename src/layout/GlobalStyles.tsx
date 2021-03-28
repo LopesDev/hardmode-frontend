@@ -1,4 +1,7 @@
-import { createGlobalStyle } from 'styled-components';
+import { ReactNode } from 'react';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+
+import Theme from './Theme';
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -49,4 +52,13 @@ const GlobalStyle = createGlobalStyle`
 
 `;
 
-export default GlobalStyle;
+const HardModStylesProvider = ({ children }: { children: ReactNode }) => {
+    return (
+        <ThemeProvider theme={Theme}>
+            <GlobalStyle />
+            {children}
+        </ThemeProvider>
+    )
+}
+
+export { GlobalStyle, HardModStylesProvider as default };

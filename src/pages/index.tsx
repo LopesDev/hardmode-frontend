@@ -1,32 +1,31 @@
 import React from 'react';
 import Head from 'next/head';
-import { ThemeProvider } from 'styled-components';
 
-import { ChallengesProvider } from '../context/AuthContext';
+import { AuthProvider } from '../context/AuthContext';
+import HardModStylesProvider from '../layout/GlobalStyles';
 
 import Header from '../components/header';
 
 import WellcomeSection from '../container/wellcome-section';
 
-import theme from '../layout/Theme';
-import GlobalStyles from '../layout/GlobalStyles';
-
-export default function Home() {
+function Home() {
   return (
     <>
       <Head>
         <title>HardMode Clan</title>
       </Head>
 
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
+      <HardModStylesProvider>
+        <AuthProvider authData={{ bearer: '', expiration: '' }}>
 
-        <ChallengesProvider authData={{ bearer: '', expiration: '' }}>
           <Header />
-          <WellcomeSection />
-        </ChallengesProvider>
 
-      </ThemeProvider>
+          <WellcomeSection />
+
+        </AuthProvider>
+      </HardModStylesProvider>
     </>
   )
 }
+
+export default Home;

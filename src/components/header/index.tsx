@@ -40,15 +40,17 @@ function Header() {
                 <RoutesList>
 
                     <MenuItem>
-                        <Link href="/login">
+                        <Link href="/sign-in">
                             <a>
                                 Login
                             </a>
                         </Link>
                     </MenuItem>
-                    <Anchor href="https://google.com" target="_blank" rel="noopener noreferrer">
-                        <span>Registre-se</span>
-                    </Anchor>
+                    <Link href="/sign-up">
+                        <Anchor>
+                            <span>Registre-se</span>
+                        </Anchor>
+                    </Link>
 
                 </RoutesList>
 

@@ -12,12 +12,12 @@ export interface AuthContextData {
 
 export const AuthContext = createContext({} as AuthContextData);
 
-interface ChallengesProviderProps {
+interface AuthProviderProps {
     children: ReactNode,
     authData: { bearer: string, expiration: string }
 }
 
-export const ChallengesProvider = ({ children, authData }: ChallengesProviderProps) => {
+export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
     const [user, setUser] = useState<User>();
 
     function signIn() {
