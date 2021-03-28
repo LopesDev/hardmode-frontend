@@ -10,6 +10,7 @@ const theme:DefaultTheme = {
         title: '#2E384D',
         link: '#2D9CDB',
         grey: '#E9E9E9',
+        lightGrey: '#D8D8D8',
         primary: '#FEB674',
         secondary: '#BA68C8',
     },

@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { AuthProvider } from '../../context/AuthContext';
 
 import Header from '../../components/header';
+import SignUpContainer from '../../container/sign-up';
 
 import HardModStylesProvider from '../../layout/GlobalStyles';
 
@@ -18,6 +19,8 @@ function SignUpPage() {
         <AuthProvider authData={{ bearer: '', expiration: '' }}>
 
           <Header />
+
+          <SignUpContainer />
 
         </AuthProvider>
       </HardModStylesProvider>
