@@ -26,6 +26,10 @@ const GlobalStyle = createGlobalStyle`
         font: 400 1rem ${({theme}) => theme.typografy.text.fontFamily};
     }
 
+    input, textarea, button, a {
+        appearance: none;
+    }
+
     body {
         background: ${({theme}) => theme.pallet.background};
         color: ${({ theme }) => theme.pallet.text};

@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 
-const SignUpWrapper = styled.section`
-    max-width: 1200px;
-
+const Content = styled.div`
+    padding: 0px ${({theme}) => theme.spacing(8)};
     margin: ${({theme}) => theme.spacing(8)} auto;
+
+    max-width: 1200px;
+`;
+
+const SignUpWrapper = styled.section`
     background: ${({theme}) => theme.pallet.white};
     border: 1px solid ${({theme}) => theme.pallet.lightGrey};
 
@@ -33,6 +37,22 @@ const FormSectionTitle = styled.h3`
     margin: ${({theme}) => theme.spacing(4)} 0px;
 `;
 
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    flex-wrap: wrap;
+
+    margin: 0px -${({theme}) => theme.spacing(3)};
+`;
+
+const Col = styled.div`
+    flex: 50%;
+
+    padding: ${({theme}) => `${theme.spacing(1)} ${theme.spacing(3)}`};
+`;
+
 export {
-    SignUpWrapper, FormHeader, FormSectionTitle
+    SignUpWrapper, FormHeader, FormSectionTitle, Content, Row, Col
 };
