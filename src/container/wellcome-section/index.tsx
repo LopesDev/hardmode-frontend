@@ -19,8 +19,8 @@ function WellcomeSectionContainer() {
                 </p>
 
                 <BoxFooter>
-                    <Link href="/register">
-                        <AnchorWithIcon href="/register">
+                    <Link href="/sign-up">
+                        <AnchorWithIcon>
                             <span>Criar um usuário</span>
                             <img src="/icons/dashicons_arrow-right-alt2.svg" alt="Go to register" />
                         </AnchorWithIcon>
