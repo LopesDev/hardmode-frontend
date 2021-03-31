@@ -16,7 +16,8 @@ function InputGroup({ inputType = 'text', label, id, iconPrefix, sufix, onClickS
         case 'file':
             return (
                 <GroupInputWrapper>
-                    <FileInput>
+                    <FileInput type={inputType} id={id}>
+                        {iconPrefix}
                         <label htmlFor={id}>{label}</label>
                     </FileInput>
                 </GroupInputWrapper>

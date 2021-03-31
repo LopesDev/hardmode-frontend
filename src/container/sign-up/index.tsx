@@ -33,6 +33,17 @@ function SignUpContainer() {
                     <FormSectionTitle>Dados pessoais</FormSectionTitle>
 
                     <Row>
+                        <Col xs={12} md={12} lg={12}>
+                            <hr />
+                        </Col>
+                        <Col xs={12} md={12} lg={12}>
+                            <InputGroup
+                                inputType="file"
+                                id="profilePicture"
+                                label="Foto de perfil"
+                                iconPrefix={<ImagePlaceholder color={theme.pallet.text} height={32} width={32} />}
+                            />
+                        </Col>
                         <Col xs={12} md={6} lg={6}>
                             <InputGroup
                                 inputType="text"
@@ -122,13 +133,6 @@ function SignUpContainer() {
                                 id="githubUrl"
                                 label="Perfil no GitHub"
                                 iconPrefix={<Github />}
-                            />
-                        </Col>
-                        <Col xs={12} md={6} lg={6}>
-                            <InputGroup
-                                inputType="file"
-                                id="profilePicture"
-                                label="Foto de perfil"
                             />
                         </Col>
                     </Row>

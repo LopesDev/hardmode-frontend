@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const InputTextWrapper = styled.div`
     transition: border 200ms ease-in-out;
@@ -41,6 +41,49 @@ const IconImage = styled.div`
     }
 `;
 
+const FileWrapper = styled.div<{ dragging: boolean, hasImage: boolean, fileImage: string | ArrayBuffer }>`
+    transition: all 200ms ease-in-out;
+    width: ${({theme}) => theme.spacing(20)};
+    height: ${({theme}) => theme.spacing(20)};
+    border-radius: 100%;
+    position: relative;
+    cursor: pointer;
+    background: ${({theme}) => theme.pallet.grey};
+    background-size: cover;
+    background-position: center center;
+    border: 2px dashed ${({theme}) => theme.pallet.lightGrey};
+    box-shadow: 0 5px 8px rgba(black, 0.35);
+
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+
+    input[type="file"] {
+        display: none;
+    }
+
+    ${({dragging}) => dragging && css`
+        border: 2px dashed ${({theme}) => theme.pallet.primary};
+        background: ${({theme}) => theme.pallet.background};
+    `}
+
+    ${({hasImage}) => hasImage && css`
+        opacity: 0;
+        pointer-events: none;
+        user-select: none;
+        label {
+            opacity: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+    `}
+
+    ${({fileImage}) => css`
+        background-image: url(${fileImage as string});
+    `}
+`;
+
 export {
-    InputTextWrapper, InputText, IconImage
+    InputTextWrapper, InputText, IconImage, FileWrapper
 }
