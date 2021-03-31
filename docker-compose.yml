@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hardsite
+    restart: always
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    ports:
+      - "3000:3000"
