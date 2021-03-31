@@ -23,6 +23,7 @@ const theme:DefaultTheme = {
     typografy: {
         title: {
             fontFamily: "'Montserrat', sans-serif",
+            regular: 400,
             medium: 500,
             bold: 600,
         },

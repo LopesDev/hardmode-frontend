@@ -25,6 +25,7 @@ declare module 'styled-components' {
         typografy: {
             title: {
                 fontFamily: string,
+                regular: number,
                 medium: number,
                 bold: number,
             },

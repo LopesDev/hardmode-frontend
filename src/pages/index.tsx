@@ -7,6 +7,7 @@ import HardModStylesProvider from '../layout/GlobalStyles';
 import Header from '../components/header';
 
 import WellcomeSection from '../container/wellcome-section';
+import MembersSection from '../container/members-section';
 
 function Home() {
   return (
@@ -21,6 +22,7 @@ function Home() {
           <Header />
 
           <WellcomeSection />
+          <MembersSection />
 
         </AuthProvider>
       </HardModStylesProvider>
