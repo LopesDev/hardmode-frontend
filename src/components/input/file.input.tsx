@@ -1,15 +1,9 @@
-import { ReactNode, useRef } from 'react';
+import { useRef } from 'react';
 import { InputTextWrapper, InputText, IconImage } from './styled';
 
 import { InputProps } from './input.types';
 
-interface CustomProps {
-    iconPrefix?: ReactNode,
-    sufix?: ReactNode,
-    onClickSufix?: (e) => void,
-}
-
-function TextInput({ type, id, iconPrefix, sufix, onClickSufix }: InputProps & CustomProps): JSX.Element {
+function FileInput({ type, id }: InputProps): JSX.Element {
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -21,21 +15,13 @@ function TextInput({ type, id, iconPrefix, sufix, onClickSufix }: InputProps & C
 
     return (
         <InputTextWrapper onClick={focusInput}>
-            {iconPrefix && (
-                <IconImage>{iconPrefix}</IconImage>
-            )}
-
             <InputText
                 ref={inputRef}
                 id={ id }
                 type={ type }
             />
-
-            {sufix && (
-                <IconImage onClick={onClickSufix}>{sufix}</IconImage>
-            )}
         </InputTextWrapper>
     );
 }
 
-export default TextInput;
+export default FileInput;

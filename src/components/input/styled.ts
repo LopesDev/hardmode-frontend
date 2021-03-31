@@ -34,6 +34,8 @@ const IconImage = styled.div`
 
     margin-right: ${({theme}) => theme.spacing(1)};
 
+    cursor: pointer;
+
     svg > path {
         fill: ${({theme}) => theme.pallet.title};
     }
