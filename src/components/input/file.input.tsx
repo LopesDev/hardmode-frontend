@@ -3,45 +3,36 @@ import { FileWrapper } from './styled';
 
 import { InputProps } from './input.types';
 
-function FileInput({ type, id, children }: InputProps): JSX.Element {
+function FileInput({ type, id, previewImage, children, onChange, ...props}: InputProps & { previewImage?: string | ArrayBuffer }): JSX.Element {
 
     const [ dragging, setDragging ] = useState(false);
     const [ hasImage, setHasImage ] = useState(false);
-    const [ image, setImage ] = useState<string | ArrayBuffer>();
 
     useEffect(() => {
         const fileWrapper = document.getElementById(`file-${id}`);
         const fileInput = document.getElementById(id);
 
-        function handleWrapperClick() {
+        function handleWrapperClick(e) {
             fileInput.click();
         }
 
-        function handleWrapperDragOver() {
+        function handleWrapperDragOver(e) {
+            e.preventDefault();
             setDragging(true);
         }
 
-        function handleWrapperDragLeave() {
+        function handleWrapperDragLeave(e) {
+            e.preventDefault();
             setDragging(false);
         }
 
         function handleWrapperDrop(e) {
+            e.preventDefault();
             setHasImage(true);
 
             if (e.originalEvent) {
                 const file = e.originalEvent.dataTransfer.files[0];
-                console.log(file);
-            
-                const reader = new FileReader();
-            
-                //attach event handlers here...
-            
-                reader.readAsDataURL(file);
-                reader.onload = function(e) {
-                    console.log(reader.result);
-                    setImage(reader.result);
-                }
-        
+                onChange(undefined, file);
             }
         }
 
@@ -57,17 +48,17 @@ function FileInput({ type, id, children }: InputProps): JSX.Element {
             fileWrapper.removeEventListener('drop', handleWrapperDrop);
         };
 
-    }, [id, setDragging, setHasImage, setImage]);
+    }, [id, setDragging, setHasImage]);
 
     return (
         <FileWrapper
             id={ `file-${id}` }
             dragging={dragging}
             hasImage={hasImage}
-            fileImage={image}
+            fileImage={previewImage}
         >
-            {children}
-            <input id={id} type={type} />
+            {!previewImage && children}
+            <input id={id} type={type} onChange={(e) => onChange(e, e.target.files[0])} {...props} />
         </FileWrapper>
     );
 }

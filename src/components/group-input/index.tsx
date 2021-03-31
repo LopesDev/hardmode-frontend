@@ -7,16 +7,17 @@ import { GroupInputWrapper } from './styled';
 interface CustomProps {
     iconPrefix?: ReactNode,
     sufix?: ReactNode,
-    onClickSufix?: (e) => void
+    onClickSufix?: (e) => void,
+    previewImage?: string | ArrayBuffer,
 }
 
-function InputGroup({ inputType = 'text', label, id, iconPrefix, sufix, onClickSufix }: InputGroupProps & CustomProps) {
+function InputGroup({ inputType = 'text', label, id, iconPrefix, sufix, onClickSufix, ...props }: InputGroupProps & CustomProps) {
 
     switch (inputType) {
         case 'file':
             return (
                 <GroupInputWrapper>
-                    <FileInput type={inputType} id={id}>
+                    <FileInput type={inputType} id={id} {...props}>
                         {iconPrefix}
                         <label htmlFor={id}>{label}</label>
                     </FileInput>
@@ -33,6 +34,7 @@ function InputGroup({ inputType = 'text', label, id, iconPrefix, sufix, onClickS
                         iconPrefix={iconPrefix}
                         sufix={sufix}
                         onClickSufix={onClickSufix}
+                        {...props}
                     />
                 </GroupInputWrapper>
             );
@@ -47,6 +49,7 @@ function InputGroup({ inputType = 'text', label, id, iconPrefix, sufix, onClickS
                         iconPrefix={iconPrefix}
                         sufix={sufix}
                         onClickSufix={onClickSufix}
+                        {...props}
                     />
                 </GroupInputWrapper>
             );

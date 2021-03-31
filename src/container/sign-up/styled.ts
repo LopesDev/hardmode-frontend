@@ -37,6 +37,12 @@ const FormSectionTitle = styled.h3`
     margin: ${({theme}) => theme.spacing(4)} 0px;
 `;
 
+const Center = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
 export {
-    SignUpWrapper, FormHeader, FormSectionTitle, Content
+    SignUpWrapper, FormHeader, FormSectionTitle, Content, Center
 };

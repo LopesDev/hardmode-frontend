@@ -1,9 +1,9 @@
 
-import { useState } from 'react';
+import React, { InputHTMLAttributes, useState } from 'react';
 import { useTheme } from 'styled-components';
 
 import {
-    SignUpWrapper, FormHeader, FormSectionTitle, Content
+    SignUpWrapper, FormHeader, FormSectionTitle, Content, Center
 } from './styled';
 
 import { Row, Col } from '../../components/grid';
@@ -17,8 +17,9 @@ import {
 function SignUpContainer() {
 
     const theme = useTheme();
-    const [passwordVisible, setPasswordVisible] = useState(false);
-    const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
+    const [userProfileFile, setUserProfileFile] = useState<File>();
+    const [userProfileUrl, setUserProfileUrl] = useState<string | ArrayBuffer>();
 
     return (
         <Content>
@@ -37,12 +38,28 @@ function SignUpContainer() {
                             <hr />
                         </Col>
                         <Col xs={12} md={12} lg={12}>
-                            <InputGroup
-                                inputType="file"
-                                id="profilePicture"
-                                label="Foto de perfil"
-                                iconPrefix={<ImagePlaceholder color={theme.pallet.text} height={32} width={32} />}
-                            />
+                            <Center>
+                                <InputGroup
+                                    inputType="file"
+                                    id="profilePicture"
+                                    label="Foto de perfil"
+                                    previewImage={userProfileUrl}
+                                    iconPrefix={<ImagePlaceholder color={theme.pallet.text} height={32} width={32} />}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>, file: File) => {
+                                            console.log(file);
+                                            setUserProfileFile(file);
+
+                                            const reader = new FileReader();
+                                            reader.onload = function(event) {
+                                                setUserProfileUrl(reader.result);
+                                            }
+
+                                            reader.readAsDataURL(file);
+                                            return;
+                                        }
+                                    }
+                                />
+                            </Center>
                         </Col>
                         <Col xs={12} md={6} lg={6}>
                             <InputGroup
