@@ -37,22 +37,6 @@ const FormSectionTitle = styled.h3`
     margin: ${({theme}) => theme.spacing(4)} 0px;
 `;
 
-const Row = styled.div`
-    display: flex;
-    flex-direction: row;
-
-    justify-content: center;
-    flex-wrap: wrap;
-
-    margin: 0px -${({theme}) => theme.spacing(3)};
-`;
-
-const Col = styled.div`
-    flex: 50%;
-
-    padding: ${({theme}) => `${theme.spacing(1)} ${theme.spacing(3)}`};
-`;
-
 export {
-    SignUpWrapper, FormHeader, FormSectionTitle, Content, Row, Col
+    SignUpWrapper, FormHeader, FormSectionTitle, Content
 };
