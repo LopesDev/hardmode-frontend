@@ -54,6 +54,59 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none;
     }
 
+    .ReactModal__Overlay {
+        opacity: 0;
+        transition: opacity 400ms ease-in-out;
+    }
+
+    .ReactModal__Overlay--after-open{
+        opacity: 1;
+    }
+
+    .ReactModal__Overlay--before-close{
+        opacity: 0;
+    }
+
+    .ReactModalOverlayOverride {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: ${({theme}) => theme.pallet.title}ad;
+    }
+
+    .ReactModalContentOverride {
+        position: absolute;
+
+        top: 40px;
+        left: 40px;
+        right: 40px;
+        bottom: 40px;
+
+        @media screen and (min-width: ${({theme}) => theme.breakpoint.md}) {
+            right: auto;
+            bottom: auto;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+            width: 100%;
+            height: 100%;
+            max-width: 600px;
+            max-height: 800px;
+        }
+
+
+        border: 1px solid #ccc;
+        background: #fff;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: ${({theme}) => theme.spacing(.5)};
+        outline: none;
+        padding: ${({theme}) => theme.spacing(3)};
+    }
+
 `;
 
 const HardModStylesProvider = ({ children }: { children: ReactNode }) => {

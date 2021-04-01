@@ -43,6 +43,24 @@ const Center = styled.div`
     align-items: center;
 `;
 
+const ModalContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+`;
+
+const CropperWrapper = styled.div`
+    position: relative;
+    flex: 3;
+`;
+
+const ModalFooter = styled.div`
+    position: relative;
+    flex: 1;
+`;
+
 export {
-    SignUpWrapper, FormHeader, FormSectionTitle, Content, Center
+    SignUpWrapper, FormHeader, FormSectionTitle, Content, Center, ModalContent,
+    CropperWrapper, ModalFooter
 };
