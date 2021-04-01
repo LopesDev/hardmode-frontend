@@ -7,7 +7,7 @@ import getCroppedImg from '../../utils/file.utils';
 
 import {
     SignUpWrapper, FormHeader, FormSectionTitle, Content, Center, ModalContent,
-    CropperWrapper, ModalFooter
+    CropperWrapper, ModalFooter, ZoomWrapper
 } from './styled';
 
 import { Row, Col } from '../../components/grid';
@@ -50,6 +50,7 @@ function SignUpContainer() {
 
             console.log('donee', { croppedImage });
             setCroppedImage(croppedImage);
+            setModalOpen(false);
         } catch (e) {
             console.error(e);
         }
@@ -78,7 +79,7 @@ function SignUpContainer() {
                         <Col xs={12} md={12} lg={12}>
                             <Center>
                                 <InputGroup
-                                    inputType="file"
+                                    type="file"
                                     id="profilePicture"
                                     label="Foto de perfil"
                                     previewImage={croppedImage}
@@ -103,7 +104,7 @@ function SignUpContainer() {
                         </Col>
                         <Col xs={12} md={6} lg={6}>
                             <InputGroup
-                                inputType="text"
+                                type="text"
                                 id="fullName"
                                 label="Nome completo"
                                 iconPrefix={<ContactCard />}
@@ -112,7 +113,7 @@ function SignUpContainer() {
 
                         <Col xs={12} md={6} lg={6}>
                             <InputGroup
-                                inputType="text"
+                                type="text"
                                 id="email"
                                 label="E-mail"
                                 iconPrefix={<Mail />}
@@ -121,7 +122,7 @@ function SignUpContainer() {
 
                         <Col xs={12} md={6} lg={6}>
                             <InputGroup
-                                inputType="text"
+                                type="text"
                                 id="nickName"
                                 label="Nickname em jogos"
                                 iconPrefix={<Person />}
@@ -130,7 +131,7 @@ function SignUpContainer() {
 
                         <Col xs={12} md={6} lg={6}>
                             <InputGroup
-                                inputType="text"
+                                type="text"
                                 id="phone"
                                 label="Número de celular"
                                 iconPrefix={<Phone />}
@@ -140,7 +141,7 @@ function SignUpContainer() {
 
                         <Col xs={12} md={6} lg={3}>
                             <InputGroup
-                                inputType="password"
+                                type="password"
                                 id="password"
                                 label="Senha"
                                 iconPrefix={<LockMultiple />}
@@ -149,7 +150,7 @@ function SignUpContainer() {
 
                         <Col xs={12} md={6} lg={3}>
                             <InputGroup
-                                inputType="password"
+                                type="password"
                                 id="confirmPassword"
                                 label="Confirmar senha"
                                 iconPrefix={<LockMultiple />}
@@ -162,7 +163,7 @@ function SignUpContainer() {
                     <Row>
                         <Col xs={12} md={6} lg={6}>
                             <InputGroup
-                                inputType="text"
+                                type="text"
                                 id="steamUrl"
                                 label="Perfil da steam"
                                 iconPrefix={<Steam color={theme.pallet.title} />}
@@ -170,7 +171,7 @@ function SignUpContainer() {
                         </Col>
                         <Col xs={12} md={6} lg={6}>
                             <InputGroup
-                                inputType="text"
+                                type="text"
                                 id="instagramUrl"
                                 label="Instagram"
                                 iconPrefix={<InstagramCircle />}
@@ -178,7 +179,7 @@ function SignUpContainer() {
                         </Col>
                         <Col xs={12} md={6} lg={6}>
                             <InputGroup
-                                inputType="text"
+                                type="text"
                                 id="facebookUrl"
                                 label="Facebook"
                                 iconPrefix={<FacebookIcon />}
@@ -186,7 +187,7 @@ function SignUpContainer() {
                         </Col>
                         <Col xs={12} md={6} lg={6}>
                             <InputGroup
-                                inputType="text"
+                                type="text"
                                 id="githubUrl"
                                 label="Perfil no GitHub"
                                 iconPrefix={<Github />}
@@ -203,8 +204,8 @@ function SignUpContainer() {
                 }}
                 contentLabel="Content Label"
             >
-                <ModalContent style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%' }}>
-                    <CropperWrapper style={{ position: 'relative', flex: 3 }}>
+                <ModalContent>
+                    <CropperWrapper>
                         <Cropper
                             image={userProfileUrl as string}
                             crop={crop}
@@ -214,20 +215,51 @@ function SignUpContainer() {
                             onCropComplete={onCropComplete}
                             onZoomChange={setZoom}
                             cropShape="round"
+                            showGrid={false}
                         />
+                        
+                        <ZoomWrapper>
+                            <InputGroup
+                                type="range"
+                                id="imageZoom"
+                                label="Zoom"
+                                min={1}
+                                max={3}
+                                step="0.1"
+                                defaultValue={0}
+                                onChange={e => {
+                                    const value = parseFloat(e.target.value);
+                                    setZoom(value);
+                                }}
+                                className="zoom-input-range"
+                            />
+                        </ZoomWrapper>
+
                     </CropperWrapper>
 
-                    <ModalFooter style={{ position: 'relative', flex: 1 }}>
-                        <input onChange={e => {
-                            console.log(e);
-                            console.log({target: e.target});
-                        }} type="range" min={0} max={10} />
-                        <Button
-                            onClick={showCroppedImage}
-                            type="button"
-                        >
-                            Show Result
-                        </Button>
+                    <ModalFooter>
+
+                        <div style={{ paddingTop: theme.spacing(2) }}>
+                            <Button
+                                onClick={() => {
+                                    setModalOpen(false);
+                                }}
+                                type="button"
+                            >
+                                Cancelar
+                            </Button>
+                        </div>
+
+                        <div style={{ paddingTop: theme.spacing(2) }}>
+                            <Button
+                                onClick={showCroppedImage}
+                                type="button"
+                                btnType="primary"
+                            >
+                                Confirmar
+                            </Button>
+                        </div>
+
                     </ModalFooter>
                 </ModalContent>
             </Modal>

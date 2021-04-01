@@ -81,9 +81,43 @@ const FileWrapper = styled.div<{ dragging: boolean, hasImage: boolean, fileImage
 
     ${({fileImage}) => css`
         background-image: url(${fileImage as string});
+        border: 1px solid ${({theme}) => theme.pallet.grey};
     `}
 `;
 
+const InputRange = styled.input`
+    appearance: none;
+    outline: none;
+    background-color: transparent;
+
+    &[type="range" i]::-webkit-slider-runnable-track {
+        cursor: default;
+
+        background-color: ${({theme}) => theme.pallet.white};
+        height: ${({theme}) => theme.spacing(.8)};
+        border-radius: ${({theme}) => theme.spacing(.8)};
+        border: none
+    }
+
+    &[type="range" i]::-webkit-slider-thumb {
+        appearance: none;
+        cursor: grab;
+
+        margin-top: ${({theme}) => theme.spacing(-0.8)};
+
+        height: ${({theme}) => theme.spacing(2.5)};
+        width: ${({theme}) => theme.spacing(2.5)};
+
+        border: 2px solid ${({theme}) => theme.pallet.white};
+        border-radius: ${({theme}) => theme.spacing(2)};
+        background-color: ${({theme}) => theme.pallet.primary};
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+`;
+
 export {
-    InputTextWrapper, InputText, IconImage, FileWrapper
+    InputTextWrapper, InputText, IconImage, FileWrapper, InputRange
 }

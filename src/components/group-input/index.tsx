@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { TextInput, FileInput } from '../input';
+import { TextInput, FileInput, RangeInput } from '../input';
 import { InputGroupProps } from './group-input.types';
 
 import { GroupInputWrapper } from './styled';
@@ -11,13 +11,13 @@ interface CustomProps {
     previewImage?: string | ArrayBuffer,
 }
 
-function InputGroup({ inputType = 'text', label, id, iconPrefix, sufix, onClickSufix, ...props }: InputGroupProps & CustomProps) {
+function InputGroup({ type = 'text', label, id, iconPrefix, sufix, onClickSufix, ...props }: InputGroupProps & CustomProps) {
 
-    switch (inputType) {
+    switch (type) {
         case 'file':
             return (
                 <GroupInputWrapper>
-                    <FileInput type={inputType} id={id} {...props}>
+                    <FileInput type={type} id={id} {...props}>
                         {iconPrefix}
                         <label htmlFor={id}>{label}</label>
                     </FileInput>
@@ -30,11 +30,23 @@ function InputGroup({ inputType = 'text', label, id, iconPrefix, sufix, onClickS
                     <label htmlFor={id}>{label}</label>
                     <TextInput
                         id={id}
-                        type={inputType}
+                        type={type}
                         iconPrefix={iconPrefix}
                         sufix={sufix}
                         onClickSufix={onClickSufix}
                         {...props}
+                    />
+                </GroupInputWrapper>
+            );
+
+        case 'range':
+            return (
+                <GroupInputWrapper>
+                    <label htmlFor={id}>{label}</label>
+                    <RangeInput
+                        {...props}
+                        type="range"
+                        id={id}
                     />
                 </GroupInputWrapper>
             );
@@ -45,7 +57,7 @@ function InputGroup({ inputType = 'text', label, id, iconPrefix, sufix, onClickS
                     <label htmlFor={id}>{label}</label>
                     <TextInput
                         id={id}
-                        type={inputType}
+                        type={type}
                         iconPrefix={iconPrefix}
                         sufix={sufix}
                         onClickSufix={onClickSufix}

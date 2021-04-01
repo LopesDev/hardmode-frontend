@@ -56,11 +56,36 @@ const CropperWrapper = styled.div`
 `;
 
 const ModalFooter = styled.div`
-    position: relative;
     flex: 1;
+
+    display: flex;
+    justify-content: space-between;
+`;
+
+const ZoomWrapper = styled.div`
+    position: absolute;
+    z-index: 1;
+
+    right: ${({theme}) => theme.spacing(-4)};
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: flex;
+    justify-content: flex-end;
+
+    transform: rotate(270deg);
+    > div {
+        label {
+            transform: rotate(90deg);
+            position: absolute;
+            right: ${({theme}) => theme.spacing(-5)};
+            color: ${({theme}) => theme.pallet.white};
+            top: ${({theme}) => theme.spacing(-.3)};
+        }
+    }
 `;
 
 export {
     SignUpWrapper, FormHeader, FormSectionTitle, Content, Center, ModalContent,
-    CropperWrapper, ModalFooter
+    CropperWrapper, ModalFooter, ZoomWrapper
 };
