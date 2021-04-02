@@ -2,15 +2,27 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+#### Requisitos
+- Docker
+- Docker-compose
+
+#### Como rodar o projeto?
+Após clonar o projeto, utilize o docker-compose para gerar o ambiente de desenvolvimento
+que estará disponível na porta 3000.
+
 
 ```bash
-npm run dev
-# or
-yarn dev
+# Acesse a pasta do projeto
+cd ./hardmode-frontend
+
+# Suba o container
+docker-compose up -d --build
+# OBS: --build será necessário somente na primeira vez.
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse [http://localhost:3000](http://localhost:3000) com o seu navegador para ver o resultado.
+
+## Default Readme.md
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
