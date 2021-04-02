@@ -10,6 +10,11 @@ const GroupInputWrapper = styled.div`
     }
 `;
 
+const ErrorMsg = styled.small`
+    color: ${({theme}) => theme.pallet.danger};
+    font-size: 0.91rem;
+`;
+
 export {
-    GroupInputWrapper
+    GroupInputWrapper, ErrorMsg
 }

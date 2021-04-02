@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-const InputTextWrapper = styled.div`
+const InputTextWrapper = styled.div<{validated: boolean}>`
     transition: border 200ms ease-in-out;
     cursor: text;
 
@@ -15,6 +15,10 @@ const InputTextWrapper = styled.div`
     &:focus-within {
         border: 1px solid ${({theme}) => theme.pallet.primary};
     }
+
+    ${({validated}) => !validated && css`
+        border: 1px solid ${({theme}) => theme.pallet.danger};
+    ` }
 `;
 
 const InputText = styled.input`

@@ -1,4 +1,4 @@
-type ButtonType = 'primary' | 'secondary';
+type ButtonType = 'primary' | 'secondary' | 'info';
 type ButtonSize = 'small' | 'default' | 'large';
 
 export interface ButtonProps {

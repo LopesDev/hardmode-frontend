@@ -13,6 +13,7 @@ const theme:DefaultTheme = {
         lightGrey: '#D8D8D8',
         primary: '#FEB674',
         secondary: '#BA68C8',
+        danger: '#EB5757'
     },
     
     breakpoint: {

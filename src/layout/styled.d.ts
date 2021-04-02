@@ -13,6 +13,7 @@ declare module 'styled-components' {
             primary: string,
             secondary: string,
             link: string,
+            danger: string,
         },
     
         breakpoint: {

@@ -2,16 +2,21 @@ import { ReactNode } from 'react';
 import { TextInput, FileInput, RangeInput } from '../input';
 import { InputGroupProps } from './group-input.types';
 
-import { GroupInputWrapper } from './styled';
+import { GroupInputWrapper, ErrorMsg } from './styled';
 
 interface CustomProps {
     iconPrefix?: ReactNode,
     sufix?: ReactNode,
     onClickSufix?: (e) => void,
     previewImage?: string | ArrayBuffer,
+    validated?: boolean,
+    errorMsg?: string,
+    prestine?: boolean,
 }
 
-function InputGroup({ type = 'text', label, id, iconPrefix, sufix, onClickSufix, ...props }: InputGroupProps & CustomProps) {
+function InputGroup({
+    type = 'text', label, id, iconPrefix, sufix, onClickSufix, validated, errorMsg, prestine = true, ...props
+}: InputGroupProps & CustomProps) {
 
     switch (type) {
         case 'file':
@@ -34,8 +39,10 @@ function InputGroup({ type = 'text', label, id, iconPrefix, sufix, onClickSufix,
                         iconPrefix={iconPrefix}
                         sufix={sufix}
                         onClickSufix={onClickSufix}
+                        validated={prestine || (!prestine && validated)}
                         {...props}
                     />
+                    {!prestine && !validated && <ErrorMsg>{errorMsg}</ErrorMsg>}
                 </GroupInputWrapper>
             );
 
@@ -61,8 +68,10 @@ function InputGroup({ type = 'text', label, id, iconPrefix, sufix, onClickSufix,
                         iconPrefix={iconPrefix}
                         sufix={sufix}
                         onClickSufix={onClickSufix}
+                        validated={prestine || (!prestine && validated)}
                         {...props}
                     />
+                    {!prestine && !validated && <ErrorMsg>{errorMsg}</ErrorMsg>}
                 </GroupInputWrapper>
             );
     }

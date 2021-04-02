@@ -41,13 +41,6 @@ function FileInput({ type, id, previewImage, children, onChange, ...props}: Inpu
         fileWrapper.addEventListener('dragleave', handleWrapperDragLeave);
         fileWrapper.addEventListener('drop', handleWrapperDrop);
 
-        return () => {
-            fileWrapper.removeEventListener('click', handleWrapperClick);
-            fileWrapper.removeEventListener('dragover', handleWrapperDragOver);
-            fileWrapper.removeEventListener('dragleave', handleWrapperDragLeave);
-            fileWrapper.removeEventListener('drop', handleWrapperDrop);
-        };
-
     }, [id, setDragging, setHasImage]);
 
     return (
