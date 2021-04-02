@@ -41,6 +41,37 @@ const MemberContainer = styled.div`
     justify-content: space-between;
     width: 100%;
     margin: 24px 0;
+    border-radius: ${({theme}) => theme.spacing(1)};
+    border: solid 1px #FFAD61;
+    padding: ${({theme}) => theme.spacing(2)} ${({theme}) => theme.spacing(2)};
+    transition: all .2s;
+
+    @keyframes shake {
+      10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+      }
+      
+      20%, 80% {
+        transform: translate3d(2px, 0, 0);
+      }
+    
+      30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+      }
+    
+      40%, 60% {
+        transform: translate3d(4px, 0, 0);
+      }
+    }
+
+    &:hover {
+        transition: all .2s;
+        border: solid 1px #FFBE82;
+        background-color: #FFBE82;
+        > svg {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+    }
 `
 
 const Avatar = styled.img`
@@ -49,7 +80,7 @@ const Avatar = styled.img`
     border-radius: 50%;
 `
 
-const Typo = styled.span`
+const Typo = styled.p`
     color: #4F4F4F;
     line-height: 100%;
     font-family: ${({theme}) => theme.typografy.text.fontFamily};
