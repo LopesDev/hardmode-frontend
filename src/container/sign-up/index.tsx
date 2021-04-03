@@ -1,5 +1,5 @@
 
-import React, { FormEvent, useCallback, useState } from 'react';
+import React, { FormEvent, useCallback, useState, useContext } from 'react';
 import { useTheme } from 'styled-components';
 import Cropper from 'react-easy-crop'
 import validator from 'validator';
@@ -16,6 +16,8 @@ import InputGroup from '../../components/group-input';
 import Modal from '../../components/modal';
 import Button from '../../components/button';
 
+import { AuthContext } from '../../context/AuthContext';
+
 import {
     ContactCard, FacebookIcon, Github, ImagePlaceholder, InstagramCircle, Mail, LockMultiple, Person,
     Phone, Steam
@@ -26,6 +28,8 @@ const fieldInitialState = { value: '', validated: false, prestine: true, errorMs
 function SignUpContainer(): JSX.Element {
 
     const theme = useTheme();
+
+    const { signUp } = useContext(AuthContext);
 
     // Cropping config
     const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -82,9 +86,9 @@ function SignUpContainer(): JSX.Element {
         }
     }, [croppedAreaPixels]);
 
-    const onClose = useCallback(() => {
-        setCroppedImage(null)
-    }, []);
+    // const onClose = useCallback(() => {
+    //     setCroppedImage(null)
+    // }, []);
 
     const validateFields = (): boolean => {
         const fieldsValidated = [
@@ -125,7 +129,23 @@ function SignUpContainer(): JSX.Element {
 
 
         if (validateFields()) {
-            console.log('Chamar a api de criar conta!');
+            try {
+                signUp({
+                    email: email.value,
+                    fullName: fullName.value,
+                    nickName: nickName.value,
+                    password: password.value,
+                    facebookUrl: facebookUrl.value,
+                    gitHubUrl: gitHubUrl.value,
+                    instagramUrl: instagramUrl.value,
+                    phoneNumber: phoneNumber.value,
+                    steamUrl: steamUrl.value,
+                    userProfileFile
+                });
+            } catch (e) {
+                console.error('Não foi possível criar a conta!');
+                console.error(e);
+            }
         } else {
             console.log('Formulário inválido!');
         }
@@ -428,7 +448,7 @@ function SignUpContainer(): JSX.Element {
 
                                     setInstagramUrl({
                                         ...instagramUrl,
-                                        validated: validator.isEmpty(instagramUrl.value) && isUrl,
+                                        validated: validator.isEmpty(instagramUrl.value) || isUrl,
                                         errorMsg: isUrl ? '' : 'Digite um URL válida'
                                     });
                                 }}
@@ -459,7 +479,7 @@ function SignUpContainer(): JSX.Element {
 
                                     setFacebookUrl({
                                         ...facebookUrl,
-                                        validated: validator.isEmpty(facebookUrl.value) && isUrl,
+                                        validated: validator.isEmpty(facebookUrl.value) || isUrl,
                                         errorMsg: isUrl ? '' : 'Digite um URL válida'
                                     });
                                 }}
@@ -490,7 +510,7 @@ function SignUpContainer(): JSX.Element {
 
                                     setGitHubUrl({
                                         ...gitHubUrl,
-                                        validated: validator.isEmpty(gitHubUrl.value) && isUrl,
+                                        validated: validator.isEmpty(gitHubUrl.value) || isUrl,
                                         errorMsg: isUrl ? '' : 'Digite um URL válida'
                                     });
                                 }}

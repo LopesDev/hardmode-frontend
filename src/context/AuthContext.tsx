@@ -1,4 +1,9 @@
 import { createContext, ReactNode, useState } from 'react';
+import { ApolloProvider } from '@apollo/client';
+
+import ApolloClient, { client } from '../services/ApolloClient';
+
+import { SignUpData } from './auth.types';
 
 import User from '../models/User';
 
@@ -7,7 +12,7 @@ export interface AuthContextData {
     expiration?: string,
     user?: User,
     signIn: () => void,
-    signUp: () => void,
+    signUp: ({}: SignUpData) => void,
 }
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -24,20 +29,27 @@ export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
         // TODO: Implement this function!
     }
 
-    function signUp() {
-        // TODO: Implement this function!
+    async function signUp(signUpData: SignUpData) {
+        try {
+            const signUpResponse = await ApolloClient.signUp(signUpData);
+            console.log({signUpResponse});
+        } catch(e) {
+            throw e;
+        }
     }
 
     return (
-        <AuthContext.Provider
-            value={{
-                ...authData,
-                user,
-                signIn,
-                signUp
-            }}
-        >
-            {children}
-        </AuthContext.Provider>
+        <ApolloProvider client={client}>
+            <AuthContext.Provider
+                value={{
+                    ...authData,
+                    user,
+                    signIn,
+                    signUp,
+                }}
+            >
+                {children}
+            </AuthContext.Provider>
+        </ApolloProvider>
     )
 };
