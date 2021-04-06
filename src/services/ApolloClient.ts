@@ -16,7 +16,6 @@ export const client = new Client({
 class ApolloClient {
 
     static async signUp(signUpData: SignUpData) {
-        console.log(process.env.NEXT_PUBLIC_BASE_URL);
 
         const response = await client.mutate({
             mutation: SIGN_UP,
@@ -40,8 +39,6 @@ class ApolloClient {
             const { signUp } = response.data;
             return signUp;
         }
-        console.log(response);
-        console.log(client);
 
     }
 

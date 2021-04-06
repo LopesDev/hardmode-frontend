@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useRef, DragEvent, useCallback } from 'react';
 import { FileWrapper } from './styled';
 
 import { InputProps } from './input.types';
@@ -7,41 +7,31 @@ function FileInput({ type, id, previewImage, children, onChange, ...props}: Inpu
 
     const [ dragging, setDragging ] = useState(false);
     const [ hasImage, setHasImage ] = useState(false);
+    const inputRef = useRef<HTMLInputElement>(null);
 
-    useEffect(() => {
-        const fileWrapper = document.getElementById(`file-${id}`);
-        const fileInput = document.getElementById(id);
+    const handleWrapperClick = useCallback(() => {
+        inputRef.current.click();
+    }, []);
 
-        function handleWrapperClick(e) {
-            fileInput.click();
+    const handleWrapperDragOver = useCallback((e: DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        setDragging(true);
+    }, [setDragging]);
+
+    const handleWrapperDragLeave = useCallback((e: DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        setDragging(false);
+    }, [setDragging])
+
+    const handleWrapperDrop = useCallback((e: DragEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        setHasImage(true);
+
+        if (e.dataTransfer) {
+            const file = e.dataTransfer.files[0];
+            onChange(undefined, file);
         }
-
-        function handleWrapperDragOver(e) {
-            e.preventDefault();
-            setDragging(true);
-        }
-
-        function handleWrapperDragLeave(e) {
-            e.preventDefault();
-            setDragging(false);
-        }
-
-        function handleWrapperDrop(e) {
-            e.preventDefault();
-            setHasImage(true);
-
-            if (e.originalEvent) {
-                const file = e.originalEvent.dataTransfer.files[0];
-                onChange(undefined, file);
-            }
-        }
-
-        fileWrapper.addEventListener('click', handleWrapperClick);
-        fileWrapper.addEventListener('dragover', handleWrapperDragOver);
-        fileWrapper.addEventListener('dragleave', handleWrapperDragLeave);
-        fileWrapper.addEventListener('drop', handleWrapperDrop);
-
-    }, [id, setDragging, setHasImage]);
+    }, [setHasImage, onChange]);
 
     return (
         <FileWrapper
@@ -49,9 +39,25 @@ function FileInput({ type, id, previewImage, children, onChange, ...props}: Inpu
             dragging={dragging}
             hasImage={hasImage}
             fileImage={previewImage}
+            onClick={handleWrapperClick}
+            onDragOver={handleWrapperDragOver}
+            onDragLeave={handleWrapperDragLeave}
+            onDrop={handleWrapperDrop}
         >
             {!previewImage && children}
-            <input id={id} type={type} onChange={(e) => onChange(e, e.target.files[0])} {...props} />
+            <input
+                ref={inputRef}
+                id={id}
+                type={type}
+                onChange={(e) => onChange(e, e.target.files[0])} {...props}
+                onClick={(event) => {
+                    event.stopPropagation();
+
+                    if (props.onClick) {
+                        props.onClick(event);
+                    }
+                }}
+            />
         </FileWrapper>
     );
 }
