@@ -1,7 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
-export default class MyDocument extends Document {
+class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
@@ -30,10 +30,17 @@ export default class MyDocument extends Document {
 
   render() {
     return(
-      <Html>
+      <Html lang="pt-BR">
         <Head>
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+          />
+
+          <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+          />
         </Head>
 
         <body>
@@ -46,3 +53,5 @@ export default class MyDocument extends Document {
 
   }
 }
+
+export default MyDocument;
