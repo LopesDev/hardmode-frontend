@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useState } from 'react';
 import { ApolloProvider } from '@apollo/client';
+import { toast } from 'react-toastify';
 
 import ApolloClient, { client } from '../services/ApolloClient';
 
@@ -31,10 +32,15 @@ export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
 
     async function signUp(signUpData: SignUpData) {
         try {
-            const signUpResponse = await ApolloClient.signUp(signUpData);
-            console.log({signUpResponse});
+            const newUser = await ApolloClient.signUp(signUpData);
+
+            toast.success('Usuário criado com sucesso!', {
+                hideProgressBar: true,
+            });
         } catch(e) {
-            throw e;
+            toast.error('Não foi possível criar o usuário, tente novamente mais tarde', {
+                hideProgressBar: true,
+            });
         }
     }
 

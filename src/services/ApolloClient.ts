@@ -1,6 +1,8 @@
 import { ApolloClient as Client, InMemoryCache } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 
+import User from '../models/User';
+
 import { SignUpData } from '../context/auth.types';
 
 import SIGN_UP from './mutations/signUp';
@@ -15,7 +17,7 @@ export const client = new Client({
 
 class ApolloClient {
 
-    static async signUp(signUpData: SignUpData) {
+    static async signUp(signUpData: SignUpData): Promise<User> {
 
         const response = await client.mutate({
             mutation: SIGN_UP,
@@ -37,7 +39,7 @@ class ApolloClient {
             if (response.errors) throw response.errors;
     
             const { signUp } = response.data;
-            return signUp;
+            return signUp as User;
         }
 
     }
