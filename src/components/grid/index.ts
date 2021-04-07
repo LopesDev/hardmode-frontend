@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { ColProps, BreakPoints, RowProps } from './grid.types';
+import styled, { css } from 'styled-components';
+import { ColProps, BreakPoints, RowProps, SpaceProps } from './grid.types';
 
 function _getColFlexBasis(col: BreakPoints) {
     if (col) {
@@ -33,4 +33,37 @@ const Col = styled.div<ColProps>`
     }
 `;
 
-export { Row, Col };
+const Container = styled.div`
+    padding: 0px ${({theme}) => theme.spacing(8)};
+    margin: ${({theme}) => theme.spacing(8)} auto;
+
+    max-width: 1200px;
+`;
+
+const Space = styled.div<SpaceProps>`
+    ${({horizontal = true, vertical = false, space = 0, theme}) => {
+        if (horizontal && vertical) {
+            return css`
+                padding: ${theme.spacing(space)};
+            `;
+        }
+
+        if (horizontal && !vertical) {
+            return css`
+                padding: 0px ${theme.spacing(space)};
+            `;
+        }
+
+        if (!horizontal && vertical) {
+            return css`
+                padding: 0px ${theme.spacing(space)};
+            `;
+        }
+
+        return css`
+            padding: ${theme.spacing(0)};
+        `;
+    }};
+`;
+
+export { Row, Col, Container, Space };

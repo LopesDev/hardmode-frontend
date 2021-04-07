@@ -21,3 +21,9 @@ export interface RowProps {
     alignItems?: AlignItems,
     flexWrap?: FlexWrap,
 }
+
+export interface SpaceProps {
+    horizontal?: boolean,
+    vertical?: boolean,
+    space?: number,
+}
