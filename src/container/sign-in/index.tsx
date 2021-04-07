@@ -97,7 +97,17 @@ function SignInContainer(): JSX.Element {
 
                     <Row>
 
-                        <Col xs={12} md={6} lg={6} />
+                        <Col xs={12} md={6} lg={6}>
+
+                            <Row justifyContent="center" alignItems="center">
+
+                                <Space horizontal vertical space={3}>
+                                    <img src="/img/login-ilustration.svg" alt="Login HardMode" />
+                                </Space>
+
+                            </Row>
+
+                        </Col>
 
                         <Col xs={12} md={6} lg={6}>
 
