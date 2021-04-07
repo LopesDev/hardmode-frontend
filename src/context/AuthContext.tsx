@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import ApolloClient, { client } from '../services/ApolloClient';
 
-import { SignUpData } from './auth.types';
+import { SignUpData, SignInData } from './auth.types';
 
 import User from '../models/User';
 
@@ -12,7 +12,7 @@ export interface AuthContextData {
     bearer?: string,
     expiration?: string,
     user?: User,
-    signIn: () => void,
+    signIn: ({}: SignInData) => void,
     signUp: ({}: SignUpData) => void,
 }
 
@@ -26,8 +26,9 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
     const [user, setUser] = useState<User>();
 
-    function signIn() {
-        // TODO: Implement this function!
+    function signIn(signInData: SignInData) {
+        // Terminar de implementar esse método
+        // const user = await ApolloClient.signIn(signInData);
     }
 
     async function signUp(signUpData: SignUpData) {

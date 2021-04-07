@@ -1,6 +1,5 @@
 
-import React, { FormEvent, useCallback, useState, useContext } from 'react';
-import { useTheme } from 'styled-components';
+import React, { FormEvent, useState, useContext } from 'react';
 import Link from 'next/link';
 
 import { Container, Row, Col, Space } from '../../components/grid';
@@ -17,83 +16,62 @@ const fieldInitialState = { value: '', validated: false, prestine: true, errorMs
 
 function SignInContainer(): JSX.Element {
 
-    const theme = useTheme();
-
     const { signIn } = useContext(AuthContext);
 
     // Form input fields.
     const [nickName, setNickName] = useState(fieldInitialState);
     const [password, setPassword] = useState(fieldInitialState);
 
-    // const validateFields = (): boolean => {
-    //     const fieldsValidated = [
-    //         fullName.validated,
-    //         email.validated,
-    //         nickName.validated,
-    //         confirmPassword.validated,
-    //         password.validated,
-    //         phoneNumber.prestine || phoneNumber.validated,
-    //         steamUrl.prestine || steamUrl.validated,
-    //         instagramUrl.prestine || instagramUrl.validated,
-    //         facebookUrl.prestine || facebookUrl.validated,
-    //         gitHubUrl.prestine || gitHubUrl.validated,
-    //     ];
+    const validateFields = (): boolean => {
+        const fieldsValidated = [
+            nickName.validated,
+            password.validated,
+        ];
 
-    //     return fieldsValidated.every(field => field);
+        return fieldsValidated.every(field => field);
+    }
 
-    // }
+    const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
-    // const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
-    //     event.preventDefault();
+        const requiredFields = [
+            'nickName',
+            'password',
+        ];
 
-    //     const requiredFields = [
-    //         'fullName',
-    //         'email',
-    //         'nickName',
-    //         'password',
-    //         'confirmPassword'
-    //     ];
+        await (async () => {
+            const promises:Promise<string>[] = [];
+    
+            for (const id of requiredFields) {
+                const element = document.getElementById(id);
+                element.focus();
+                element.blur();
+                promises.push(Promise.resolve('ok'));
+            }
 
-    //     for (const id of requiredFields) {
-    //         const element = document.getElementById(id);
-    //         setTimeout(() => {
-    //             element.focus();
-    //             element.blur();
-    //         }, 10);
-    //     }
+            return Promise.all(promises);
+        })();
 
-
-    //     if (validateFields()) {
-    //         try {
-    //             signUp({
-    //                 email: email.value,
-    //                 fullName: fullName.value,
-    //                 nickName: nickName.value,
-    //                 password: password.value,
-    //                 facebookUrl: facebookUrl.value,
-    //                 gitHubUrl: gitHubUrl.value,
-    //                 instagramUrl: instagramUrl.value,
-    //                 phoneNumber: phoneNumber.value,
-    //                 steamUrl: steamUrl.value,
-    //                 userProfileFile
-    //             });
-    //         } catch (e) {
-    //             console.error('Não foi possível criar a conta!');
-    //             console.error(e);
-    //         }
-    //     } else {
-    //         console.log('Formulário inválido!');
-    //     }
-    // }
+        if (validateFields()) {
+            try {
+                signIn({
+                    nickName: nickName.value,
+                    password: password.value,
+                });
+            } catch (e) {
+                console.error('Não foi possível Fazer o login!');
+                console.error(e);
+            }
+        } else {
+            console.log('Formulário inválido!');
+        }
+    }
 
     return (
         <Container>
 
             <SignInWrapper>
-                <form onSubmit={(e) => {
-                    e.preventDefault();
-                    console.log('submited');
-                }}>
+                <form onSubmit={handleFormSubmit}>
 
                     <Row>
 

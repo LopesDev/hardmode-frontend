@@ -3,7 +3,7 @@ import { createUploadLink } from 'apollo-upload-client';
 
 import User from '../models/User';
 
-import { SignUpData } from '../context/auth.types';
+import { SignUpData, SignInData} from '../context/auth.types';
 
 import SIGN_UP from './mutations/signUp';
 
@@ -41,6 +41,15 @@ class ApolloClient {
             const { signUp } = response.data;
             return signUp as User;
         }
+
+    }
+
+    static async signIn(signInData: SignInData): Promise<User> {
+
+        // Terminar de implementar essa chamada
+        const response = await client.query({
+
+        });
 
     }
 

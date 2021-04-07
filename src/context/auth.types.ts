@@ -10,3 +10,8 @@ export interface SignUpData {
     facebookUrl?: string,
     gitHubUrl?: string
 }
+
+export interface SignInData {
+    nickName: string,
+    password: string,
+}
