@@ -6,6 +6,7 @@ import User from '../models/User';
 import { SignUpData, SignInData} from '../context/auth.types';
 
 import SIGN_UP from './mutations/signUp';
+import SIGN_IN from './queries/signIn';
 
 export const client = new Client({
     link: createUploadLink({
@@ -44,15 +45,22 @@ class ApolloClient {
 
     }
 
-    static async signIn(signInData: SignInData): Promise<User> {
-
-        // Terminar de implementar essa chamada
+    static async signIn(signInData: SignInData): Promise<{token: String, expireDate?: String}> {
         const response = await client.query({
-
+            query: SIGN_IN,
+            variables: {
+                email: signInData.nickName,
+                password: signInData.password
+            }
         });
 
-    }
+        if (!response) throw new Error('Não foi possível receber uma resposta do servidor.');
 
+        if (response.errors) throw response.errors;
+
+        const { signIn } = response.data;
+        return signIn;
+    }
 }
 
 export default ApolloClient;

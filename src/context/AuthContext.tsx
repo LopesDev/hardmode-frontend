@@ -26,9 +26,19 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
     const [user, setUser] = useState<User>();
 
-    function signIn(signInData: SignInData) {
-        // Terminar de implementar esse método
-        // const user = await ApolloClient.signIn(signInData);
+    async function signIn(signInData: SignInData) {
+        try {
+            const { token, expireDate } = await ApolloClient.signIn(signInData);
+
+            console.log({token, expireDate});
+            // Terminar de implementar esse método, Preciso armazenar esses dados em algum tipo de
+            // localStorage, porém como estamos trabalhando com SSR, acredito que vai ser necessário
+            // armazenar em um cookie e ou session storage.
+        } catch (e) {
+            toast.error(e.message, {
+                hideProgressBar: true,
+            });
+        }
     }
 
     async function signUp(signUpData: SignUpData) {
