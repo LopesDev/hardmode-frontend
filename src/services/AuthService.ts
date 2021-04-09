@@ -1,6 +1,4 @@
-import { ApolloClient as Client, InMemoryCache } from '@apollo/client';
-import { createUploadLink } from 'apollo-upload-client';
-
+import client from './ApolloService';
 import User from '../models/User';
 
 import { SignUpData, SignInData} from '../context/auth.types';
@@ -8,13 +6,7 @@ import { SignUpData, SignInData} from '../context/auth.types';
 import SIGN_UP from './mutations/signUp';
 import SIGN_IN from './queries/signIn';
 
-export const client = new Client({
-    link: createUploadLink({
-        uri: `${process.env.NEXT_PUBLIC_BASE_URL}/graphql`,
-    }),
-    cache: new InMemoryCache(),
-    ssrMode: true,
-});
+
 
 class AuthService {
 

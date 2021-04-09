@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { ApolloProvider } from '@apollo/client';
 import { toast } from 'react-toastify';
 
-import AuthService, { client } from '../services/AuthService';
+import client from '../services/ApolloService';
+import AuthService from '../services/AuthService';
 import AuthCookieService from '../services/AuthCookieService';
 
 import { SignUpData, SignInData } from './auth.types';
