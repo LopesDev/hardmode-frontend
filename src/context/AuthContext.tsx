@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { ApolloProvider } from '@apollo/client';
 import { toast } from 'react-toastify';
 
-import ApolloClient, { client } from '../services/ApolloClient';
+import AuthService, { client } from '../services/AuthService';
 import AuthCookieService from '../services/AuthCookieService';
 
 import { SignUpData, SignInData } from './auth.types';
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
 
     async function signIn(signInData: SignInData) {
         try {
-            const { token, expireDate } = await ApolloClient.signIn(signInData);
+            const { token, expireDate } = await AuthService.signIn(signInData);
             console.log({token, expireDate});
 
             const expires = new Date(expireDate);
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
 
     async function signUp(signUpData: SignUpData) {
         try {
-            const newUser = await ApolloClient.signUp(signUpData);
+            const newUser = await AuthService.signUp(signUpData);
 
             toast.success('Usuário criado com sucesso!', {
                 hideProgressBar: true,

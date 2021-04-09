@@ -16,7 +16,7 @@ export const client = new Client({
     ssrMode: true,
 });
 
-class ApolloClient {
+class AuthService {
 
     static async signUp(signUpData: SignUpData): Promise<User> {
 
@@ -63,4 +63,4 @@ class ApolloClient {
     }
 }
 
-export default ApolloClient;
+export default AuthService;
