@@ -1,9 +1,7 @@
 import { createContext, ReactNode, useState } from 'react';
 import { useRouter } from 'next/router';
-import { ApolloProvider } from '@apollo/client';
 import { toast } from 'react-toastify';
 
-import client from '../services/ApolloService';
 import AuthService from '../services/AuthService';
 import AuthCookieService from '../services/AuthCookieService';
 
@@ -60,17 +58,15 @@ export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
     }
 
     return (
-        <ApolloProvider client={client}>
-            <AuthContext.Provider
-                value={{
-                    ...authData,
-                    user,
-                    signIn,
-                    signUp,
-                }}
-            >
-                {children}
-            </AuthContext.Provider>
-        </ApolloProvider>
+        <AuthContext.Provider
+            value={{
+                ...authData,
+                user,
+                signIn,
+                signUp,
+            }}
+        >
+            {children}
+        </AuthContext.Provider>
     )
 };
