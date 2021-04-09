@@ -1,8 +1,10 @@
 import { createContext, ReactNode, useState } from 'react';
+import { useRouter } from 'next/router';
 import { ApolloProvider } from '@apollo/client';
 import { toast } from 'react-toastify';
 
 import ApolloClient, { client } from '../services/ApolloClient';
+import AuthCookieService from '../services/AuthCookieService';
 
 import { SignUpData, SignInData } from './auth.types';
 
@@ -24,16 +26,17 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
+    const router = useRouter();
     const [user, setUser] = useState<User>();
 
     async function signIn(signInData: SignInData) {
         try {
             const { token, expireDate } = await ApolloClient.signIn(signInData);
-
             console.log({token, expireDate});
-            // Terminar de implementar esse método, Preciso armazenar esses dados em algum tipo de
-            // localStorage, porém como estamos trabalhando com SSR, acredito que vai ser necessário
-            // armazenar em um cookie e ou session storage.
+
+            const expires = new Date(expireDate);
+            AuthCookieService.setCookie({bearerToken: token, expires});
+            router.push('/', '/', {scroll: true});
         } catch (e) {
             toast.error(e.message, {
                 hideProgressBar: true,

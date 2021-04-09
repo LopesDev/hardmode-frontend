@@ -45,7 +45,7 @@ class ApolloClient {
 
     }
 
-    static async signIn(signInData: SignInData): Promise<{token: String, expireDate?: String}> {
+    static async signIn(signInData: SignInData): Promise<{token: string, expireDate?: string}> {
         const response = await client.query({
             query: SIGN_IN,
             variables: {

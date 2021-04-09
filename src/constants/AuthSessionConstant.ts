@@ -1,3 +1,3 @@
-export enum AuthSessionEnum {
-    CURRENT_SESSION = 'CURRENT_SESSION'
+export enum AuthCookieEnum {
+    CURRENT_COOKIE = 'AuthJWT'
 }
