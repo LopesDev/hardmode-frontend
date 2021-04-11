@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import User from '../../models/User';
 
 export default gql`
     query {
@@ -20,3 +21,7 @@ export default gql`
         }
     }
 `;
+
+export interface getUsetApolloInterface {
+    getUser?: User
+}

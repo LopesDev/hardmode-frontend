@@ -1,6 +1,6 @@
 
 import { useMemo } from 'react';
-import { ApolloClient, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, DocumentNode, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { createUploadLink } from 'apollo-upload-client';
 
@@ -48,6 +48,10 @@ function useApollo(initialState) {
 	return apolloClient;
 }
 
+function useCache(query?: DocumentNode) {
+	return useApollo(null).cache.readQuery({query: query});
+}
+
 function defaultLink(JWT: string) {
 	const uploadLink = createUploadLink({
 		uri: `${process.env.NEXT_PUBLIC_BASE_URL}/graphql`,
@@ -66,4 +70,4 @@ function defaultLink(JWT: string) {
 	return authLink.concat(uploadLink);
 }
 
-export {initializeApollo as default, useApollo};
+export {initializeApollo as default, useApollo, useCache};

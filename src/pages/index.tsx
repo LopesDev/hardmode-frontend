@@ -1,24 +1,21 @@
 import React from 'react';
 import Head from 'next/head';
-import {useQuery} from '@apollo/client'
 
 import {AuthCookieEnum} from '../constants/AuthSessionConstant';
 
 import { AuthProvider } from '../context/AuthContext';
 import HardModStylesProvider from '../layout/GlobalStyles';
-import initializeApollo, {useApollo} from '../services/ApolloService';
+import initializeApollo from '../services/ApolloService';
 
 import GET_USER from '../services/queries/getUser';
+import AuthCookieService from '../services/AuthCookieService';
 
 import Header from '../components/header';
 
 import WellcomeSection from '../container/wellcome-section';
 
-import User from '../models/User';
-
 function Home({initialApolloState}) {
-  const apolloClient = useApollo(initialApolloState);
-  const {getUser}: {getUser: User} = apolloClient.cache.readQuery({query: GET_USER});
+  initializeApollo(initialApolloState, AuthCookieService.getCookie());
 
   return (
     <>

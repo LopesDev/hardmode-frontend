@@ -17,6 +17,7 @@ const Navigation = styled.nav`
 const RoutesList = styled.ul`
     display: flex;
     justify-content: flex-start;
+    align-items: center;
 
     list-style: none;
 `;
