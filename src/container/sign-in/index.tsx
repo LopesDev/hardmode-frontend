@@ -15,7 +15,6 @@ import { LockMultiple, Person } from '../../icons';
 const fieldInitialState = { value: '', validated: false, prestine: true, errorMsg: '' }
 
 function SignInContainer(): JSX.Element {
-
     const { signIn } = useContext(AuthContext);
 
     // Form input fields.

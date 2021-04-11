@@ -11,8 +11,9 @@ import SIGN_IN from './queries/signIn';
 class AuthService {
 
     static async signUp(signUpData: SignUpData): Promise<User> {
+        const apolloClient = client();
 
-        const response = await client.mutate({
+        const response = await apolloClient.mutate({
             mutation: SIGN_UP,
             variables: {
                 fullName: signUpData.fullName,
@@ -38,7 +39,9 @@ class AuthService {
     }
 
     static async signIn(signInData: SignInData): Promise<{token: string, expireDate?: string}> {
-        const response = await client.query({
+        const apolloClient = client();
+
+        const response = await apolloClient.query({
             query: SIGN_IN,
             variables: {
                 email: signInData.nickName,

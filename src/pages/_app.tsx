@@ -4,7 +4,6 @@ import {useApollo} from '../services/ApolloService';
 
 function MyApp({ Component, pageProps }) {
 	const client = useApollo(pageProps.initialApolloState);
-	console.log({pageProps});
 
 	return (
 		<ApolloProvider client={client}>

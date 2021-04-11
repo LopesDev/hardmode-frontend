@@ -8,32 +8,20 @@ import AuthCookieService from './AuthCookieService';
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
-function createApolloClient(JWT?: string) {
+function createApolloClient(JWT: string) {
 
-	const uploadLink = createUploadLink({
-		uri: `${process.env.NEXT_PUBLIC_BASE_URL}/graphql`,
-	});
-
-	const authLink = setContext((_, { headers }) => {
-		// return the headers to the context so httpLink can read them
-		return {
-			headers: {
-				...headers,
-				Authorization: JWT,
-			}
-		}
-	});
+	const apolloLink = defaultLink(JWT);
 
 	return new ApolloClient({
 		ssrMode: typeof window === "undefined",
-		link: authLink.concat(uploadLink),
+		link: apolloLink,
 		cache: new InMemoryCache(),
 	});
 }
 
-function initializeApollo(initialState = null, JWT?: string) {
+function initializeApollo(initialState = null, JWT: string) {
 	const _apolloClient = apolloClient ?? createApolloClient(JWT);
-  
+
 	// If your page has Next.js data fetching methods that use Apollo Client, the initial state
 	// gets hydrated here
 	if (initialState) {
@@ -54,8 +42,28 @@ function initializeApollo(initialState = null, JWT?: string) {
 }
 
 function useApollo(initialState) {
-	const apolloClient = useMemo(() => initializeApollo(initialState), [initialState]);
+	const JWT = AuthCookieService.getCookie();
+
+	const apolloClient = useMemo(() => initializeApollo(initialState, JWT), [initialState]);
 	return apolloClient;
+}
+
+function defaultLink(JWT: string) {
+	const uploadLink = createUploadLink({
+		uri: `${process.env.NEXT_PUBLIC_BASE_URL}/graphql`,
+	});
+
+	const authLink = setContext((_, { headers }) => {
+		// return the headers to the context so httpLink can read them
+		return {
+			headers: {
+				...headers,
+				Authorization: JWT ?? '',
+			}
+		}
+	});
+
+	return authLink.concat(uploadLink);
 }
 
 export {initializeApollo as default, useApollo};

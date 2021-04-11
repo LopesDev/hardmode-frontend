@@ -173,7 +173,6 @@ function SignUpContainer(): JSX.Element {
                                     previewImage={croppedImage}
                                     iconPrefix={<ImagePlaceholder color={theme.pallet.text} height={32} width={32} />}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>, file: File) => {
-                                            console.log(file);
                                             setUserProfileFile(file);
 
                                             const reader = new FileReader();

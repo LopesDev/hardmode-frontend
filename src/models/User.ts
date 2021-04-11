@@ -5,6 +5,7 @@ export default interface User {
     fullName: string,
     nickName: string,
     email: string,
+    profileImage: string,
     celphone: string,
     steamUrl: string,
     instagramUrl: string,
@@ -12,4 +13,6 @@ export default interface User {
     githubUrl: string,
     points: string,
     roles: Array<AuthRole>,
+    createdAt: string,
+    updatedAt: string
 }

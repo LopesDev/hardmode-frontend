@@ -1,12 +1,12 @@
 import React from 'react';
 import Head from 'next/head';
-import { useQuery } from '@apollo/client'
+import {useQuery} from '@apollo/client'
 
 import {AuthCookieEnum} from '../constants/AuthSessionConstant';
 
 import { AuthProvider } from '../context/AuthContext';
 import HardModStylesProvider from '../layout/GlobalStyles';
-import initializeApollo from '../services/ApolloService';
+import initializeApollo, {useApollo} from '../services/ApolloService';
 
 import GET_USER from '../services/queries/getUser';
 
@@ -14,10 +14,11 @@ import Header from '../components/header';
 
 import WellcomeSection from '../container/wellcome-section';
 
-function Home({initialApolloState}) {
-  const { data, loading, error } = useQuery(GET_USER);
+import User from '../models/User';
 
-  console.log({data, loading, error});
+function Home({initialApolloState}) {
+  const apolloClient = useApollo(initialApolloState);
+  const {getUser}: {getUser: User} = apolloClient.cache.readQuery({query: GET_USER});
 
   return (
     <>
@@ -43,6 +44,7 @@ export async function getServerSideProps({ req, res, ...context }) {
   // console.log(context);
   try {
     const JWT = req.cookies[AuthCookieEnum.CURRENT_COOKIE];
+
     if (JWT) {
       const apolloClient = initializeApollo(null, JWT);
 
@@ -58,7 +60,7 @@ export async function getServerSideProps({ req, res, ...context }) {
     }
 
     return {
-      props: {}
+      props: {initialApolloState: null}
     }
   } catch (err) {
     return {

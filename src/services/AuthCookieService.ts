@@ -7,17 +7,17 @@ interface SetCookieI {
 }
 
 class AuthCookieService {
-    static setCookie({bearerToken, expires}: SetCookieI) {
+    static setCookie({bearerToken, expires}: SetCookieI): void {
         Cookie.set(AuthCookieEnum.CURRENT_COOKIE, `Bearer ${bearerToken}`, {
             expires,
         });
     }
 
-    static getCookie(): string {
+    static getCookie(): string | undefined {
         return Cookie.get(AuthCookieEnum.CURRENT_COOKIE);
     }
 
-    clearCookie() {
+    static clearCookie(): void {
         Cookie.remove(AuthCookieEnum.CURRENT_COOKIE);
     }
 }
