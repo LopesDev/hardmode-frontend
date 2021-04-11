@@ -1,10 +1,14 @@
 import Link from 'next/link';
+import { useTheme } from 'styled-components';
+import { ArrowRight } from '../../icons';
 
 import {
     WellcomeSection, SVGWrapper, WellcomeBox, BoxFooter, AnchorWithIcon, Anchor
 } from './styled';
 
 function WellcomeSectionContainer() {
+    const theme = useTheme();
+
     return (
         <WellcomeSection>
             
@@ -22,7 +26,7 @@ function WellcomeSectionContainer() {
                     <Link href="/sign-up">
                         <AnchorWithIcon>
                             <span>Criar um usuário</span>
-                            <img src="/icons/dashicons_arrow-right-alt2.svg" alt="Go to register" />
+                            <ArrowRight color={theme.pallet.grey} />
                         </AnchorWithIcon>
                     </Link>
 
