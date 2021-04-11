@@ -2,7 +2,7 @@ import { createContext, ReactNode, useState, useEffect, useContext } from 'react
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
-import {useCache} from '../services/ApolloService';
+import {useCache, useApollo} from '../services/ApolloService';
 import GET_USER, {getUsetApolloInterface} from '../services/queries/getUser';
 
 import AuthService from '../services/AuthService';
@@ -31,6 +31,7 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
     const router = useRouter();
     const [user, setUser] = useState<User>();
+    const apolloClient = useApollo();
     const data: getUsetApolloInterface = useCache(GET_USER);
 
     useEffect(() => {
@@ -41,7 +42,6 @@ export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
         }
 
     }, [setUser, data]);
-
 
     async function signIn(signInData: SignInData) {
         try {
@@ -74,6 +74,7 @@ export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
 
     function signOut() {
         AuthCookieService.clearCookie();
+        apolloClient.clearStore();
         setUser(null);
     }
 

@@ -1,5 +1,3 @@
-
-import { useMemo } from 'react';
 import { ApolloClient, DocumentNode, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { createUploadLink } from 'apollo-upload-client';
@@ -41,7 +39,7 @@ function initializeApollo(initialState = null, JWT: string) {
 	return _apolloClient;
 }
 
-function useApollo(initialState) {
+function useApollo(initialState?: NormalizedCacheObject) {
 	const JWT = AuthCookieService.getCookie();
 
 	const apolloClient = initializeApollo(initialState, JWT);
