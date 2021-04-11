@@ -44,7 +44,7 @@ function initializeApollo(initialState = null, JWT: string) {
 function useApollo(initialState) {
 	const JWT = AuthCookieService.getCookie();
 
-	const apolloClient = useMemo(() => initializeApollo(initialState, JWT), [initialState]);
+	const apolloClient = initializeApollo(initialState, JWT);
 	return apolloClient;
 }
 

@@ -1,8 +1,5 @@
 import Link from 'next/link';
-
-import {useCache} from '../../services/ApolloService';
-import AuthCookieService from '../../services/AuthCookieService';
-import GET_USER, {getUsetApolloInterface} from '../../services/queries/getUser';
+import { useAuth } from '../../context/AuthContext';
 
 import Avatar from '../avatar';
 
@@ -11,7 +8,7 @@ import {
 } from './styled';
 
 function Header() {
-    const data:getUsetApolloInterface = useCache(GET_USER);
+    const { user, signOut } = useAuth();
 
     return (
         <HeaderWrapper>
@@ -46,15 +43,15 @@ function Header() {
                 </MainContent>
 
                 <RoutesList>
-                    {data && data.getUser ? (<>
+                    {user ? (<>
                         <MenuItem>
                             <Link href="/">
-                                <Anchor onClick={AuthCookieService.clearCookie}>
+                                <Anchor onClick={signOut}>
                                     Sair
                                 </Anchor>
                             </Link>
                         </MenuItem>
-                        <Avatar photo={data.getUser.profileImage} />
+                        <Avatar photo={user.profileImage} />
                     </>) : (<>
                     <MenuItem>
                         <Link href="/sign-in">

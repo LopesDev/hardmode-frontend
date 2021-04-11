@@ -1,6 +1,9 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+
+import {useCache} from '../services/ApolloService';
+import GET_USER, {getUsetApolloInterface} from '../services/queries/getUser';
 
 import AuthService from '../services/AuthService';
 import AuthCookieService from '../services/AuthCookieService';
@@ -15,6 +18,7 @@ export interface AuthContextData {
     user?: User,
     signIn: ({}: SignInData) => void,
     signUp: ({}: SignUpData) => void,
+    signOut: () => void,
 }
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -27,6 +31,17 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
     const router = useRouter();
     const [user, setUser] = useState<User>();
+    const data: getUsetApolloInterface = useCache(GET_USER);
+
+    useEffect(() => {
+        if (data) {
+            const { getUser } = data;
+    
+            if (getUser !== user) setUser(getUser);
+        }
+
+    }, [setUser, data]);
+
 
     async function signIn(signInData: SignInData) {
         try {
@@ -57,6 +72,11 @@ export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
         }
     }
 
+    function signOut() {
+        AuthCookieService.clearCookie();
+        setUser(null);
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -64,9 +84,14 @@ export const AuthProvider = ({ children, authData }: AuthProviderProps) => {
                 user,
                 signIn,
                 signUp,
+                signOut
             }}
         >
             {children}
         </AuthContext.Provider>
     )
 };
+
+export function useAuth() {
+    return useContext(AuthContext);
+}
